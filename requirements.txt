@@ -1,0 +1,4 @@
+django
+pytz
+mysqlclient
+django-mysql-pymysql

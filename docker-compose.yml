@@ -1,0 +1,28 @@
+version: '3'
+services:
+    web:
+        build: .
+        container_name: mt_cloud_web
+        ports:
+            - "127.0.0.1:8033:8000"
+        # volumes:
+        #    - .:/app
+        networks:
+          - mtnet
+        links:
+            - db
+
+    db:
+        image: "mysql:8.0.25"
+        container_name: mt_cloud_db
+        environment:
+            MYSQL_ROOT_PASSWORD: lcklsdhnlsebgflsdkjcfhsd
+        volumes:
+            - ./database:/var/lib/mysql
+        networks:
+          - mtnet
+
+networks:
+  mtnet:
+    external:
+      name: mtnet
