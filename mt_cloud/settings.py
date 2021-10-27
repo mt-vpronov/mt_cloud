@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,13 +20,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+with open('/etc/secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2t$+19d=%z7y7(g!yjvbawb4kme=b(#9sd%ynhsc%h)%a8&-8k'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+debug_flag_filename = '/etc/debug_flag.txt'
+if os.path.exists(debug_flag_filename):
+    with open() as f:
+        DEBUG = f.read().strip()
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 'cloud.mobiteam.com.ua']
 
 
 # Application definition
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'upload_app',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

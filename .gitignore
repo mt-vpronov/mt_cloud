@@ -1,4 +1,6 @@
+secret_key.txt
 database/
+media/
 .idea/
 
 # Created by .ignore support plugin (hsz.mobi)
