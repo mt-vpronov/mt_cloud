@@ -26,16 +26,9 @@ with open(os.path.join(keys_dir, 'secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
 # SECURITY WARNING: keep the secret key used in production secret!
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
-#debug_flag_filename = '/etc/debug_flag.txt'
-#if os.path.exists(debug_flag_filename):
-#    with open() as f:
-#        DEBUG = f.read().strip()
-#else:
-#    DEBUG = False
 with open(os.path.join(keys_dir, 'debug_flag.txt')) as f:
-    DEBUG = f.read().strip()
+    debug_str = f.read().strip()
+DEBUG = (debug_str == 'True')
 
 
 ALLOWED_HOSTS = ['127.0.0.1',
