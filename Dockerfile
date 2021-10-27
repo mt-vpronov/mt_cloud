@@ -6,7 +6,6 @@ RUN apk update &&\
 WORKDIR /app
 COPY upload_app upload_app/
 COPY manage.py requirements.txt ./
-COPY secret_key.txt /etc
 COPY mt_cloud mt_cloud/
 COPY templates templates/
 RUN pip install -r requirements.txt &&\

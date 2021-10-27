@@ -20,20 +20,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-with open('/etc/secret_key.txt') as f:
+keys_dir = os.path.join(BASE_DIR, 'keys')
+# with open('/etc/secret_key.txt') as f:
+with open(os.path.join(keys_dir, 'secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-debug_flag_filename = '/etc/debug_flag.txt'
-if os.path.exists(debug_flag_filename):
-    with open() as f:
-        DEBUG = f.read().strip()
-else:
-    DEBUG = False
+#debug_flag_filename = '/etc/debug_flag.txt'
+#if os.path.exists(debug_flag_filename):
+#    with open() as f:
+#        DEBUG = f.read().strip()
+#else:
+#    DEBUG = False
+with open(os.path.join(keys_dir, 'debug_flag.txt')) as f:
+    DEBUG = f.read().strip()
 
-ALLOWED_HOSTS = ['localhost',
+
+ALLOWED_HOSTS = ['127.0.0.1',
                  'cloud.mobiteam.com.ua']
 
 
