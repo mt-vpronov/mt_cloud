@@ -6,7 +6,7 @@ services:
         ports:
             - "127.0.0.1:8033:8000"
         volumes:
-            - ./media:/media
+            - ./media:/app/media
             - ./keys:/app/keys
         networks:
           - mtnet
