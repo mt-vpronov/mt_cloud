@@ -1,27 +1,41 @@
 version: '3'
 services:
-    web:
-        build: .
-        container_name: mt_cloud_web
-        ports:
-            - "127.0.0.1:8033:8000"
-        volumes:
-            - ./media:/app/media
-            - ./keys:/app/keys
-        networks:
-          - mtnet
-        links:
-            - db
+  nginx:
+    image: nginx:latest
+    container_name: mt_cloud_nginx
+    ports:
+      - "127.0.0.1:8033:8000"
+    volumes:
+    #  - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - static:/static
+    networks:
+      - mtnet
+    depends_on:
+      - web
+  web:
+      build: .
+      container_name: mt_cloud_web
+      expose:
+        - "8000"
+      volumes:
+        - ./media:/app/media
+        - ./keys:/app/keys
+        - static:/app/static
+      networks:
+        - mtnet
+      links:
+        - db
 
-    db:
-        image: "mysql:8.0.25"
-        container_name: mt_cloud_db
-        environment:
-            MYSQL_ROOT_PASSWORD: lcklsdhnlsebgflsdkjcfhsd
-        volumes:
-            - database:/var/lib/mysql
-        networks:
-          - mtnet
+  db:
+    image: "mysql:8.0.25"
+    container_name: mt_cloud_db
+    environment:
+      MYSQL_ROOT_PASSWORD: lcklsdhnlsebgflsdkjcfhsd
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - mtnet
 
 networks:
   mtnet:
@@ -30,3 +44,4 @@ networks:
 
 volumes:
   database:
+  static:

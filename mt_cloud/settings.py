@@ -32,6 +32,7 @@ DEBUG = (debug_str == 'True')
 
 
 ALLOWED_HOSTS = ['127.0.0.1',
+                 'web',
                  'cloud.mobiteam.com.ua']
 
 
