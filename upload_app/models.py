@@ -1,12 +1,12 @@
 from django.db import models
-from datetime import datetime, timedelta
+from django.utils import timezone as tz
 
 
-def default_delete_at():
-    return datetime.now() + timedelta(days=3)
+def next_day_dt(n=3):
+    return tz.localtime(tz.now()) + tz.timedelta(days=n)
 
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
     docfile = models.FileField(upload_to='documents/%Y/%m/%d')
-    delete_at = models.DateTimeField(default=default_delete_at, db_index=True)
+    delete_at = models.DateTimeField(default=next_day_dt, db_index=True)
