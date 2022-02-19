@@ -9,10 +9,22 @@
 
     <body>
         <!-- List of uploaded documents -->
+        {% block scripts %}
+            <script>
+                function CopyText(element_id) {
+                    var text = document.getElementById(element_id)
+                    text.select();
+                    document.execCommand('copy')
+                }
+            </script>
+        {% endblock scripts %}
         {% if documents %}
             <ul>
                 {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                    <li>
+                        <a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a>
+                        <button style="background:green; text-align:center;" onclick="CopyText({{ document.docfile.id }})">Copy Text</button>
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
