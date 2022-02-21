@@ -1,12 +1,9 @@
-FROM python:3.9-alpine3.14
-
-RUN apk update &&\
-    apk add python3-dev mariadb-dev mariadb-connector-c-dev build-base
+FROM mt_cloud_web_base:202202211354
 
 WORKDIR /app
 COPY upload_app upload_app/
 COPY static static/
-COPY manage.py requirements.txt ./
+COPY manage.py ./
 COPY mt_cloud mt_cloud/
 # COPY templates templates/
 RUN pip install -r requirements.txt &&\

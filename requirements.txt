@@ -2,3 +2,6 @@ django
 pytz
 mysqlclient
 django-mysql-pymysql
+djangorestframework
+djoser
+djangorestframework_simplejwt
