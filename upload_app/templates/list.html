@@ -11,10 +11,14 @@
         <!-- List of uploaded documents -->
         {% block scripts %}
             <script>
-                function CopyText(element_id) {
-                    var text = document.getElementById(element_id)
-                    text.select();
-                    document.execCommand('copy')
+                function CopyText(text) {
+                    const textarea = document.createElement('textarea');
+                    document.body.appendChild(textarea);
+                    textarea.value = text;
+                    textarea.select();
+                    textarea.setSelectionRange(0, 99999);
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
                 }
             </script>
         {% endblock scripts %}
@@ -23,7 +27,7 @@
                 {% for document in documents %}
                     <li>
                         <a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a>
-                        <button style="background:green; text-align:center;" onclick="CopyText({{ document.docfile.id }})">Copy Text</button>
+                        <button onclick="CopyText('https://cloud.mobiteam.com.ua{{ document.docfile.url }}')">Copy Text</button>
                     </li>
                 {% endfor %}
             </ul>
